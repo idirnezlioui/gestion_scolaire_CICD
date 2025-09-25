@@ -1,5 +1,3 @@
-# 1) Remplacer le fichier en one-shot (évite les erreurs d'éditeur)
-cat > .github/workflows/build.yml <<'YML'
 name: CI build & push images to GHCR
 
 on:
@@ -14,19 +12,15 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Login to GHCR
-        uses: docker/login-action@v3
+      - uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # ---- Back ----
       - name: Build & push back
         run: |
           docker build \
@@ -37,7 +31,6 @@ jobs:
           docker push ghcr.io/${{ github.repository_owner }}/gestion-back:latest
           docker push ghcr.io/${{ github.repository_owner }}/gestion-back:${{ github.sha }}
 
-      # ---- Front admin ----
       - name: Build & push front-admin
         run: |
           docker build \
@@ -48,7 +41,6 @@ jobs:
           docker push ghcr.io/${{ github.repository_owner }}/gestion-front:latest
           docker push ghcr.io/${{ github.repository_owner }}/gestion-front:${{ github.sha }}
 
-      # ---- Front étudiant (optionnel) ----
       - name: Build & push espace-etudiant
         run: |
           docker build \
@@ -58,12 +50,3 @@ jobs:
             gestion-scolaire-server/espace-etudiant-app/espace-etudiant
           docker push ghcr.io/${{ github.repository_owner }}/espace-etudiant:latest
           docker push ghcr.io/${{ github.repository_owner }}/espace-etudiant:${{ github.sha }}
-YML
-
-# 2) Sécurité : remplacer les TAB par des espaces (YAML interdit les tabulations)
-sed -i 's/\t/  /g' .github/workflows/build.yml
-
-# 3) Commit & push
-git add .github/workflows/build.yml
-git commit -m "ci: minimal valid workflow + correct Dockerfile paths"
-git push
