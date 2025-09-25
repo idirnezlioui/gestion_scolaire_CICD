@@ -1,8 +1,33 @@
+name: CI: build & push images to GHCR
+
+on:
+  push:
+    branches: [ "main" ]
+    # (optionnel) ne déclenche que si ces dossiers changent
+    paths:
+      - "gestion-scolaire-server/gestion-scolaire-back/**"
+      - "gestion-scolaire-server/gestion-scolaire-front/gestion-scolaire/**"
+      - "gestion-scolaire-server/espace-etudiant-app/espace-etudiant/**"
+      - ".github/workflows/build.yml"
+
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Debug paths
+        run: |
+          echo "Dockerfiles trouvés :"
+          find . -iname Dockerfile -printf "%p\n" || true
+          echo "Arbo (2 niveaux) :"
+          ls -la
+          find . -maxdepth 2 -type d -printf "%p\n" || true
 
       - name: Login to GHCR
         uses: docker/login-action@v3
@@ -22,7 +47,7 @@ jobs:
           docker push ghcr.io/${{ github.repository_owner }}/gestion-back:latest
           docker push ghcr.io/${{ github.repository_owner }}/gestion-back:${{ github.sha }}
 
-      # ---- Front admin ----
+      # ---- Front admin (Angular) ----
       - name: Build & push front-admin
         run: |
           docker build \
