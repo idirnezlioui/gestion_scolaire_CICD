@@ -21,32 +21,35 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # ---- Back ----
       - name: Build & push back
         run: |
           docker build \
-            -f gestion-scolaire-server/gestion-scolaire-back/Dockerfile \
+            -f gestion-scolaire-back/Dockerfile \
             -t ghcr.io/${{ github.repository_owner }}/gestion-back:latest \
             -t ghcr.io/${{ github.repository_owner }}/gestion-back:${{ github.sha }} \
-            gestion-scolaire-server/gestion-scolaire-back
+            gestion-scolaire-back
           docker push ghcr.io/${{ github.repository_owner }}/gestion-back:latest
           docker push ghcr.io/${{ github.repository_owner }}/gestion-back:${{ github.sha }}
 
+      # ---- Front admin (Angular) ----
       - name: Build & push front-admin
         run: |
           docker build \
-            -f gestion-scolaire-server/gestion-scolaire-front/gestion-scolaire/Dockerfile \
+            -f gestion-scolaire-front/gestion-scolaire/Dockerfile \
             -t ghcr.io/${{ github.repository_owner }}/gestion-front:latest \
             -t ghcr.io/${{ github.repository_owner }}/gestion-front:${{ github.sha }} \
-            gestion-scolaire-server/gestion-scolaire-front/gestion-scolaire
+            gestion-scolaire-front/gestion-scolaire
           docker push ghcr.io/${{ github.repository_owner }}/gestion-front:latest
           docker push ghcr.io/${{ github.repository_owner }}/gestion-front:${{ github.sha }}
 
+      # ---- Front étudiant ----
       - name: Build & push espace-etudiant
         run: |
           docker build \
-            -f gestion-scolaire-server/espace-etudiant-app/espace-etudiant/Dockerfile \
+            -f espace-etudiant-app/espace-etudiant/Dockerfile \
             -t ghcr.io/${{ github.repository_owner }}/espace-etudiant:latest \
             -t ghcr.io/${{ github.repository_owner }}/espace-etudiant:${{ github.sha }} \
-            gestion-scolaire-server/espace-etudiant-app/espace-etudiant
+            espace-etudiant-app/espace-etudiant
           docker push ghcr.io/${{ github.repository_owner }}/espace-etudiant:latest
           docker push ghcr.io/${{ github.repository_owner }}/espace-etudiant:${{ github.sha }}
