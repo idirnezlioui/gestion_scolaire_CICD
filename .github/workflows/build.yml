@@ -22,21 +22,24 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
-        - name: Debug back context
-          working-directory: ./gestion-scolaire-back
-          run: |
-              pwd
-              ls -la
-              git status --porcelain
 
+      - name: Debug back context
+        working-directory: ./gestion-scolaire-back
+        run: |
+          pwd
+          ls -la
+          git status --porcelain
 
       # ---- Back ----
       - name: Build & push back
         working-directory: ./gestion-scolaire-back
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/gestion-back:latest \
-                       -t ghcr.io/${{ github.repository_owner }}/gestion-back:${{ github.sha }} .
+          ls -la
+          docker build --progress=plain \
+            --file Dockerfile \
+            -t ghcr.io/${{ github.repository_owner }}/gestion-back:latest \
+            -t ghcr.io/${{ github.repository_owner }}/gestion-back:${{ github.sha }} \
+            .
           docker push ghcr.io/${{ github.repository_owner }}/gestion-back:latest
           docker push ghcr.io/${{ github.repository_owner }}/gestion-back:${{ github.sha }}
 
@@ -44,8 +47,12 @@ jobs:
       - name: Build & push front-admin
         working-directory: ./gestion-scolaire-front/gestion-scolaire
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/gestion-front:latest \
-                       -t ghcr.io/${{ github.repository_owner }}/gestion-front:${{ github.sha }} .
+          ls -la
+          docker build --progress=plain \
+            --file Dockerfile \
+            -t ghcr.io/${{ github.repository_owner }}/gestion-front:latest \
+            -t ghcr.io/${{ github.repository_owner }}/gestion-front:${{ github.sha }} \
+            .
           docker push ghcr.io/${{ github.repository_owner }}/gestion-front:latest
           docker push ghcr.io/${{ github.repository_owner }}/gestion-front:${{ github.sha }}
 
@@ -53,7 +60,11 @@ jobs:
       - name: Build & push espace-etudiant
         working-directory: ./espace-etudiant-app/espace-etudiant
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/espace-etudiant:latest \
-                       -t ghcr.io/${{ github.repository_owner }}/espace-etudiant:${{ github.sha }} .
+          ls -la
+          docker build --progress=plain \
+            --file Dockerfile \
+            -t ghcr.io/${{ github.repository_owner }}/espace-etudiant:latest \
+            -t ghcr.io/${{ github.repository_owner }}/espace-etudiant:${{ github.sha }} \
+            .
           docker push ghcr.io/${{ github.repository_owner }}/espace-etudiant:latest
           docker push ghcr.io/${{ github.repository_owner }}/espace-etudiant:${{ github.sha }}
