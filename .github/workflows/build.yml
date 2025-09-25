@@ -1,17 +1,9 @@
-name: CI build & push images to GHCR
-
-on:
-  push:
-    branches:
-      - main
-
-permissions:
-  contents: read
-  packages: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -23,33 +15,27 @@ jobs:
 
       # ---- Back ----
       - name: Build & push back
+        working-directory: ./gestion-scolaire-back
         run: |
-          docker build \
-            -f gestion-scolaire-back/Dockerfile \
-            -t ghcr.io/${{ github.repository_owner }}/gestion-back:latest \
-            -t ghcr.io/${{ github.repository_owner }}/gestion-back:${{ github.sha }} \
-            gestion-scolaire-back
+          docker build -t ghcr.io/${{ github.repository_owner }}/gestion-back:latest \
+                       -t ghcr.io/${{ github.repository_owner }}/gestion-back:${{ github.sha }} .
           docker push ghcr.io/${{ github.repository_owner }}/gestion-back:latest
           docker push ghcr.io/${{ github.repository_owner }}/gestion-back:${{ github.sha }}
 
       # ---- Front admin (Angular) ----
       - name: Build & push front-admin
+        working-directory: ./gestion-scolaire-front/gestion-scolaire
         run: |
-          docker build \
-            -f gestion-scolaire-front/gestion-scolaire/Dockerfile \
-            -t ghcr.io/${{ github.repository_owner }}/gestion-front:latest \
-            -t ghcr.io/${{ github.repository_owner }}/gestion-front:${{ github.sha }} \
-            gestion-scolaire-front/gestion-scolaire
+          docker build -t ghcr.io/${{ github.repository_owner }}/gestion-front:latest \
+                       -t ghcr.io/${{ github.repository_owner }}/gestion-front:${{ github.sha }} .
           docker push ghcr.io/${{ github.repository_owner }}/gestion-front:latest
           docker push ghcr.io/${{ github.repository_owner }}/gestion-front:${{ github.sha }}
 
       # ---- Front étudiant ----
       - name: Build & push espace-etudiant
+        working-directory: ./espace-etudiant-app/espace-etudiant
         run: |
-          docker build \
-            -f espace-etudiant-app/espace-etudiant/Dockerfile \
-            -t ghcr.io/${{ github.repository_owner }}/espace-etudiant:latest \
-            -t ghcr.io/${{ github.repository_owner }}/espace-etudiant:${{ github.sha }} \
-            espace-etudiant-app/espace-etudiant
+          docker build -t ghcr.io/${{ github.repository_owner }}/espace-etudiant:latest \
+                       -t ghcr.io/${{ github.repository_owner }}/espace-etudiant:${{ github.sha }} .
           docker push ghcr.io/${{ github.repository_owner }}/espace-etudiant:latest
           docker push ghcr.io/${{ github.repository_owner }}/espace-etudiant:${{ github.sha }}
