@@ -3,6 +3,7 @@ node_modules/
 *.log
 *.sql
 backups/
-*.tgz
-token.text
+dist/
+build/
+coverage/
 token.text
