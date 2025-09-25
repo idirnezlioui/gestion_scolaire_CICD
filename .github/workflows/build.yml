@@ -22,6 +22,14 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      
+        - name: Debug back context
+          working-directory: ./gestion-scolaire-back
+          run: |
+              pwd
+              ls -la
+              git status --porcelain
+
 
       # ---- Back ----
       - name: Build & push back
