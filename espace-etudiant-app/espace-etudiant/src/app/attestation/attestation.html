@@ -1,0 +1,71 @@
+<div id="attestation-inscription" class="bg-white p-12 max-w-3xl mx-auto mt-10 border border-gray-300 rounded shadow text-[15px] leading-relaxed font-[serif]">
+  <!-- En-tête -->
+  <div class="flex justify-between items-start mb-6">
+    <img src="img/logoEcole.png" alt="Logo" class="h-20" />
+    <div class="text-sm text-right leading-snug">
+      <p class="font-semibold text-gray-800">Institut GoldenCollar</p>
+      <p class="text-xs text-gray-600">N° d’authentification : <strong>A44075E311754</strong></p>
+    </div>
+  </div>
+
+  <!-- Titre -->
+  <h1 class="text-2xl font-bold text-center mb-8 underline">ATTESTATION D’INSCRIPTION</h1>
+
+  <!-- Introduction -->
+  <p class="mb-6 text-justify">
+    Nous soussignés, <strong>INSTITUT GOLDENCOLLAR</strong>, Établissement d’Enseignement Supérieur Privé, attestons que :
+  </p>
+
+  <!-- Informations de l'étudiant -->
+  <div class="mb-6 space-y-1">
+    <p><strong>Nom :</strong> {{ etudiant.nom }} <strong>Prénom :</strong> {{ etudiant.prenom }}</p>
+    <p><strong>Domicilié au :</strong> {{ etudiant.adresse }}</p>
+    <p><strong>Né(e) le :</strong> {{ etudiant.date_naissance }} à {{ etudiant.lieu_naissance }}</p>
+    <p><strong>Nationalité :</strong> {{ etudiant.nationalite }}</p>
+  </div>
+
+  <!-- Détails pédagogiques -->
+  <div class="mb-6 space-y-1">
+    <p>Est inscrit dans notre établissement en cursus de formation :</p>
+    <p><strong>Spécialité :</strong> {{ etudiant.specialite }}</p>
+    <p><strong>Niveau de formation :</strong> {{ etudiant.niveau }}</p>
+    <p><strong>Numéro d’étudiant :</strong> {{ etudiant.num_etudiant }}</p>
+    <p><strong>Pour une durée de :</strong> {{ etudiant.duree }}</p>
+    <p>Du {{ etudiant.date_debut }} au {{ etudiant.date_fin }}</p>
+  </div>
+
+  <!-- Mentions finales -->
+  <div class="mb-6 text-justify">
+    <p>
+      À la fin de l’année scolaire, si le candidat réussit toutes les évaluations et l’examen final,
+      nous lui délivrons une attestation de réussite, qui lui permettra de s’inscrire à un niveau supérieur.
+    </p>
+    <p class="mt-2">
+      À la fin du parcours, en cas de réussite, le candidat obtiendra un diplôme Mastère de niveau Bac+5
+      de notre école.
+    </p>
+    <p class="mt-2">
+      pour servire et faire valoir ce que de droit 
+    </p>
+  </div>
+
+  <!-- Signature -->
+  <div class="text-right mt-10">
+    <p class="text-sm">{{ etudiant.lieu_certificat }}, le {{ etudiant.date_certificat }}</p>
+    <p class="mt-10 text-sm">Co-Directeur</p>
+    <p class="mt-1 font-bold">M.R. HAVARD</p>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center text-xs text-gray-500 mt-12 border-t pt-4 italic">
+    INSTITUT GOLDENCOLLAR — 30 rue Esquirol, 75013 Paris — Tel : 01 47 83 32 01
+  </footer>
+</div>
+
+<!-- Bouton de téléchargement -->
+<div class="text-center my-8">
+  <button (click)="telechargerPDF('attestation-inscription', 'attestation')" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded shadow">
+    📄 Télécharger l’attestation
+  </button>
+</div>
+

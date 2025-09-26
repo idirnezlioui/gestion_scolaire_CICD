@@ -1,0 +1,74 @@
+<app-sidebar></app-sidebar>
+
+<div class="sm:ml-64 p-6">
+  <h1 class="text-2xl font-bold mb-4">Planning Administrateur</h1>
+  <p class="text-gray-600 mb-6">Gestion des cours, examens et événements</p>
+
+  <div class="flex items-center justify-between mb-4">
+    <div class="flex gap-2 items-center">
+      <button class="p-2 bg-gray-200 rounded" (click)="currentDate.setDate(currentDate.getDate() - 7)">←</button>
+      <strong>{{ currentDate | date: 'd MMMM y' }}</strong>
+      <button class="p-2 bg-gray-200 rounded" (click)="currentDate.setDate(currentDate.getDate() + 7)">→</button>
+    </div>
+    <div class="flex items-center gap-3">
+      <select class="p-2 rounded border" [(ngModel)]="selectedView">
+        <option value="Semaine">Semaine</option>
+        <option value="Jour">Jour</option>
+      </select>
+      <button class="bg-black text-white px-4 py-2 rounded">+ Ajouter un événement</button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <!-- Colonne gauche -->
+    <div class="col-span-1">
+      <div class="mb-4">
+        <h3 class="font-bold">Aujourd’hui ({{ getEventsForToday().length }})</h3>
+        <ul class="text-sm mt-2">
+          @for (event of getEventsForToday(); track event.id) {
+            <li class="mb-2">
+              <span class="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded">{{ event.type }}</span>
+              <p class="font-semibold">{{ event.title }}</p>
+              <p class="text-xs text-gray-600">{{ event.classe }} · {{ event.salle }}</p>
+            </li>
+          }
+        </ul>
+      </div>
+      <div class="border-t pt-4 mt-4">
+        <h3 class="font-bold mb-2">Statistiques</h3>
+        <ul class="text-sm">
+          <li>Cours: {{ getCoursCount() }}</li>
+<li>Examens: {{ getExamensCount() }}</li>
+<li>Réunions: {{ getReunionsCount() }}</li>
+
+        </ul>
+      </div>
+    </div>
+
+    <!-- Colonne droite : grille -->
+    <div class="col-span-3 overflow-x-auto">
+      <div class="grid grid-cols-8 border-b text-center text-sm font-bold bg-gray-100">
+        <div class="p-2 border-r">Heure</div>
+        @for (day of getDaysOfWeek(); track day) {
+          <div class="p-2 border-r">{{ day | date: 'EEE dd' }}</div>
+        }
+      </div>
+
+      @for (hour of hours; track hour) {
+        <div class="grid grid-cols-8 border-b text-sm h-16 relative">
+          <div class="p-2 text-right pr-4 border-r">{{ hour }}:00</div>
+          @for (day of getDaysOfWeek(); track day) {
+            <div class="relative border-r">
+              @for (event of getEventsForSlot(day, hour); track event.id) {
+  <div class="absolute top-1 left-1 right-1 bg-blue-500 text-white text-xs p-1 rounded">
+    {{ event.title }}
+  </div>
+}
+
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

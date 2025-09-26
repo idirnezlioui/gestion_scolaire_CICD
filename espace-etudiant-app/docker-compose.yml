@@ -1,0 +1,12 @@
+services:
+  espace-etudiant:
+    build: ./espace-etudiant
+    ports:
+      - "4300:4300"
+    volumes:
+      - ./espace-etudiant:/app
+      - /app/node_modules
+    working_dir: /app
+    command: npx ng serve --host 0.0.0.0 --port 4300
+    environment:
+      - NG_CACHE=false

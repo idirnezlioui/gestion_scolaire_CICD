@@ -1,0 +1,4 @@
+/* dans planning.component.css si besoin */
+.planning-grid {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}

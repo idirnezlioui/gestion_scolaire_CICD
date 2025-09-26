@@ -1,0 +1,73 @@
+<app-sidebar></app-sidebar>
+
+<div class="p-6 sm:ml-64 pt-20">
+   <h1 class="text-3xl font-bold mb-8 text-gray-900 dark:text-white text-center ">Mes certificats</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-1 justify-items-center lg:grid-cols-3 gap-6 ">
+    <!-- Carte 1 -->
+    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-center">Certificat de Scolarité</h5>
+      <p class="mb-3 text-gray-500 dark:text-gray-400">Téléchargez votre certificat de scolarité.</p>
+      <a href="/certificat" class="text-blue-600 hover:underline">Télécharger</a>
+    </div>
+
+    <!-- Carte 2 -->
+    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-center">Attestation d'inscription</h5>
+      <p class="mb-3 text-gray-500 dark:text-gray-400">Recevez une preuve officielle de votre inscription.</p>
+      <a href="/atestsation" class="text-blue-600 hover:underline">Télécharger</a>
+    </div>
+
+    <!-- Carte 3 -->
+     @for (doc of documentsDispo; track doc) {
+      <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-center">Relevé de Notes</h5>
+      <p class="mb-3 text-gray-500 dark:text-gray-400">Accédez à vos résultats académiques.</p>
+      <a (click)="download(doc)"  class="text-blue-600 hover:underline">Télécharger</a>
+      
+    </div>
+
+     }
+    
+  </div>
+</div>
+
+<div class="p-6 sm:ml-64 pt-20">
+  <h2 class="text-xl font-bold mb-8 text-gray-700 dark:text-white text-center"> Information / Règlementation</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-1 justify-items-center lg:grid-cols-3 gap-6 " >
+    
+    <!-- Carte 1 -->
+    <a href="#" class="flex flex-col bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+      <img class="object-cover w-full h-48 rounded-t-lg" src="img/reglement.jpg" alt="">
+      <div class="p-4">
+        <h5 class="mb-2 text-lg font-bold text-gray-900 dark:text-white text-center">Règlement Interieure</h5>
+        <p class="text-sm text-gray-700 dark:text-gray-400">Consultez les règles générales de l’établissement concernant la discipline, l’assiduité, et le respect du cadre éducatif.</p>
+      </div>
+    </a>
+
+    <!-- Carte 2 -->
+    <a href="#" class="flex flex-col bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+      <img class="object-cover w-full h-48 rounded-t-lg" src="img/programme.jpg" alt="">
+      <div class="p-4">
+        <h5 class="mb-2 text-lg font-bold text-gray-900 dark:text-white text-center">Nos Programmes</h5>
+        <p class="text-sm text-gray-700 dark:text-gray-400">  Découvrez les parcours de formation proposés, les matières enseignées, et les compétences visées pour chaque filière.</p>
+      </div>
+    </a>
+
+    <!-- Carte 3 -->
+    <a href="#" class="flex flex-col bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+      <img class="object-cover w-full h-48 rounded-t-lg" src="img/information.jpg" alt="">
+      <div class="p-4">
+        <h5 class="mb-2 text-lg font-bold text-gray-900 dark:text-white text-center">Informations </h5>
+        <p class="text-sm text-gray-700 dark:text-gray-400">Accédez aux actualités importantes, annonces administratives, et recommandations destinées aux étudiants.</p>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+
+
+
+

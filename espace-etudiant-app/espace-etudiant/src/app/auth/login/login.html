@@ -1,0 +1,44 @@
+<div class="min-h-screen bg-gradient-to-br from-[#f4f4fb] to-[#eae9f9] flex items-center justify-center p-4">
+  <div class="bg-white rounded-xl shadow-md p-8 w-full max-w-md text-center">
+    <img src="img/icone.jpg" alt="Planify" class="mx-auto w-12 h-12 mb-4" />
+    <h2 class="text-2xl font-bold text-gray-800">Connexion à votre espace étudiant</h2>
+    <p class="text-sm text-gray-500 mb-6">Accédez à vos cours, plannings et ressources</p>
+
+    <form (ngSubmit)="onSubmit()" class="space-y-4">
+      <div class="text-left">
+        <label for="email" class="block text-sm font-medium text-gray-700">Adresse email</label>
+        <input type="email" [(ngModel)]="email" name="email" id="email"
+               placeholder="votre.email@exemple.com"
+               class="mt-1 w-full p-2.5 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      </div>
+
+      <div class="text-left">
+        <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+        <input type="password" [(ngModel)]="password" name="password" id="password"
+               placeholder="Votre mot de passe"
+               class="mt-1 w-full p-2.5 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      </div>
+
+      <div class="flex justify-between text-sm text-gray-600 items-center">
+        <label class="inline-flex items-center">
+          <input type="checkbox" [(ngModel)]="remember" name="remember" class="form-checkbox text-indigo-600">
+          <span class="ml-2">Se souvenir de moi</span>
+        </label>
+        <a href="#" class="text-indigo-600 hover:underline">Mot de passe oublié ?</a>
+      </div>
+      @if (erreurMessage) {
+        <p  class="text-red-600 text-sm text-left">{{ erreurMessage }}</p>
+      }
+
+      <button type="submit"
+              class="w-full bg-gradient-to-r from-indigo-600 to-blue-500 hover:opacity-90 text-white font-semibold py-2.5 rounded-lg flex items-center justify-center gap-2">
+        <i class="fas fa-sign-in-alt"></i>
+        Se connecter
+      </button>
+    </form>
+
+    <p class="text-sm mt-4 text-gray-600">Pas encore de compte ?
+      <a href="#" class="text-indigo-600 hover:underline">Créer un compte</a>
+    </p>
+  </div>
+</div>

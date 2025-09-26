@@ -1,0 +1,4 @@
+/* Pour une transition douce lors du hover sur le bouton modifier */
+button:hover {
+  transition: all 0.3s ease-in-out;
+}

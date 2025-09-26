@@ -1,0 +1,151 @@
+<app-sidebar></app-sidebar>
+
+
+@if (etudiant) {
+<div class="sm:ml-64 p-6 bg-gray-50 min-h-screen py-20">
+  <div class="bg-white p-6 rounded-lg shadow mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="flex items-center gap-4">
+      <img [src]="etudiant.photo" class="w-16 h-16 rounded-full border-2 border-blue-500" />
+      <div>
+        <h2 class="text-2xl font-bold">Bienvenue, {{ etudiant.nom }} !</h2>
+        <div class="flex gap-2 text-sm text-gray-600 mt-1">
+          <span>{{ etudiant.niveau }}</span>
+          <span>{{ etudiant.num_etudiant }}</span>
+          <span>{{ etudiant.domaine }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="flex gap-3">
+      <button class="border px-4 py-2 rounded flex items-center gap-2" (click)="actualiser()" [disabled]="isLoading">
+        @if (isLoading) {
+          <svg  class="animate-spin h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+        }
+        
+        @if (!isLoading) {
+          <span>🔄 Actualiser</span>
+        }
+        @if (isLoading) {
+          <span >Chargement...</span>
+        }
+</button>
+
+      <a href="/profile"><button class="bg-blue-600 text-white px-4 py-2 rounded">👤 Modifier mes infos</button></a>
+    </div>
+  </div>
+
+  <!-- Cartes Résumé -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="bg-white p-4 rounded-lg shadow text-center">
+      <p class="text-sm text-gray-500">Présences</p>
+      <p class="text-2xl font-bold text-green-600">{{ etudiant.presences }}</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow text-center">
+      <p class="text-sm text-gray-500">Absences</p>
+      <p class="text-2xl font-bold text-red-500">{{ etudiant.absences }}</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow text-center">
+      <p class="text-sm text-gray-500">Documents</p>
+      <p class="text-2xl font-bold text-blue-600">{{ etudiant.documents }}</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow text-center">
+      <p class="text-sm text-gray-500">Notifications</p>
+      <p class="text-2xl font-bold text-purple-600">{{ etudiant.notifications }}</p>
+    </div>
+  </div>
+
+  <!-- Liens rapides et événements -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <!-- Liens rapides -->
+    <div class="md:col-span-2 bg-white rounded-lg shadow p-6">
+      <h3 class="text-lg font-semibold mb-4">📎 Liens rapides</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="bg-blue-50 p-4 rounded shadow flex items-center gap-2 w-full hover:bg-blue-100 cursor-pointer">
+  <!-- Icône personnalisée -->
+  <svg class="w-6 h-6 text-blue-700" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M6 16v-3h.375a.626.626 0 0 1 .625.626v1.749a.626.626 0 0 1-.626.625H6Zm6-2.5a.5.5 0 1 1 1 0v2a.5.5 0 0 1-1 0v-2Z"/>
+    <path fill-rule="evenodd" d="M11 7V2h7a2 2 0 0 1 2 2v5h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2H3a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h6a2 2 0 0 0 2-2Zm7.683 6.006 1.335-.024-.037-2-1.327.024a2.647 2.647 0 0 0-2.636 2.647v1.706a2.647 2.647 0 0 0 2.647 2.647H20v-2h-1.335a.647.647 0 0 1-.647-.647v-1.706a.647.647 0 0 1 .647-.647h.018ZM5 11a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1.376A2.626 2.626 0 0 0 9 15.375v-1.75A2.626 2.626 0 0 0 6.375 11H5Zm7.5 0a2.5 2.5 0 0 0-2.5 2.5v2a2.5 2.5 0 0 0 5 0v-2a2.5 2.5 0 0 0-2.5-2.5Z" clip-rule="evenodd"/>
+    <path d="M9 7V2.221a2 0 0 0-.5.365L4.586 6.5a2 2 0 0 0-.365.5H9Z"/>
+  </svg>
+
+  <!-- Texte -->
+  <a href="/certificats" class="text-sm font-semibold text-blue-700">Mes documents</a>
+</div>
+
+
+        <div class="bg-green-50 p-4 rounded shadow flex items-center gap-2 w-full hover:bg-green-100 cursor-pointer">
+  <svg class="w-6 h-6 text-green-700" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd"/>
+  </svg>
+  <a href="/planning" class="text-sm font-semibold text-green-700">Mon planning</a>
+</div>
+
+        <a href="/certificat" class="bg-yellow-50 p-4 rounded shadow flex items-center gap-2 w-full hover:bg-yellow-100 cursor-pointer">
+  <svg class="w-6 h-6 text-yellow-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M5 10V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1v6M5 19v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1M10 3v4a1 1 0 0 1-1 1H5m14 9.006h-.335a1.647 1.647 0 0 1-1.647-1.647v-1.706a1.647 1.647 0 0 1 1.647-1.647L19 12M5 12v5h1.375A1.626 1.626 0 0 0 8 15.375v-1.75A1.626 1.626 0 0 0 6.375 12H5Zm9 1.5v2a1.5 1.5 0 0 1-1.5 1.5v0a1.5 1.5 0 0 1-1.5-1.5v-2a1.5 1.5 0 0 1 1.5-1.5v0a1.5 1.5 0 0 1 1.5 1.5Z"/>
+  </svg>
+  
+  <span class="text-sm font-semibold text-yellow-600">Certificats</span>
+</a>
+
+        <div class="bg-purple-50 p-4 rounded shadow flex items-center gap-2 w-full hover:bg-purple-100 cursor-pointer">
+  <svg class="w-6 h-6 text-purple-700" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M6.97825 3.99999c-.3729 0-.74128.08169-1.07926.23934-.32394.15109-.61243.36845-.84696.63786-1.81892 1.82189-2.35302 3.87423-1.89899 5.93671.43916 1.9949 1.77747 3.8929 3.45642 5.572 1.67897 1.6791 3.57614 3.0176 5.57034 3.4591 2.0612.4563 4.1141-.0726 5.9396-1.8853.2705-.2348.4888-.524.6405-.8489.1581-.3387.2401-.7081.2401-1.0819 0-.3739-.082-.7432-.2401-1.0819-.1516-.3247-.3696-.6137-.6398-.8483l-1.2098-1.2106c-.5043-.5041-1.1879-.7872-1.9007-.7872-.7128 0-1.3968.2835-1.9011.7876l-.6178.6181c-.1512.1513-.3563.2363-.5701.2363-.2138 0-.4189-.085-.5701-.2363l-1.85336-1.8545c-.15117-.1513-.23609-.3565-.23609-.5704 0-.214.08493-.4192.23613-.5705l.61812-.61851c.5037-.50461.7867-1.18868.7867-1.90191s-.2833-1.39767-.7871-1.90228L8.90499 4.8778c-.23462-.26969-.5233-.48727-.84749-.63847-.33798-.15765-.70636-.23934-1.07925-.23934Z"/>
+    <path fill-rule="evenodd" d="M18.0299 8.98132c0 .55229-.4477 1-1 .99999l-3.03-.00002c-.5522 0-1-.44772-1-1V5.99995c0-.55229.4478-1 1-1 .5523 0 1 .44771 1 1v.58112l3.3184-3.29111c.3921-.38892 1.0253-.38631 1.4142.00582.3889.39213.3863 1.02529-.0058 1.4142l-3.2984 3.27133h.6016c.5523.00001 1 .44773 1 1.00001Z" clip-rule="evenodd"/>
+  </svg>
+  <span class="text-sm font-semibold text-purple-700">Contact admin</span>
+</div>
+
+      </div>
+    </div>
+
+    <!-- Événements -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <h3 class="text-lg font-semibold mb-4">📅 Prochains événements</h3>
+      <ul class="space-y-3 text-sm">
+        @for (event of evenements; track event.title) {
+          <li class="flex justify-between items-center border-b pb-2">
+            <span>{{ event.title }}</span>
+            <span class="text-gray-500 text-xs">{{ event.date }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <!-- Présence -->
+  <div class="bg-white rounded-lg shadow p-6 text-center">
+    <h3 class="text-lg font-semibold mb-4">📊 Aperçu des présences</h3>
+    <div class="flex justify-center items-center">
+      <div class="relative w-32 h-32">
+        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+          <path class="text-gray-200" stroke-width="4" d="M18 2.084a15.916 15.916 0 1 1 0 31.832" fill="none" />
+          <path
+  class="text-green-500"
+  stroke-width="4"
+  [attr.stroke-dasharray]="etudiant.pourcentage + ', 100'"
+  d="M18 2.084a15.916 15.916 0 1 1 0 31.832"
+  fill="none"
+/>
+
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="text-xl font-bold">{{etudiant.pourcentage}}%</span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 text-sm text-gray-600">
+      <p>Présent : {{ totalPresences }}</p>
+      <p>Absent : {{ totalAbsences }}</p>
+    </div>
+  </div>
+</div>
+}
+
+
+
+
+
