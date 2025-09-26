@@ -1,0 +1,132 @@
+.student-liste-container{
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius:10px ;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.student-liste-container h2{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+.student-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.student-table th ,
+.student-table td{
+    border-bottom: 2px solid #ddd;
+    padding: 10px;
+    text-align: center;
+
+}
+
+.student-table th{
+    background-color: #3f51b5;
+    color: white;
+    font-weight: bold;
+}
+
+.student-table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.student-table tr:hover{
+    background-color: #e1e1e1;
+    cursor: pointer;
+}
+
+.btn{
+    padding: 5px 10px;
+    margin: 2px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+.btn-edit{
+    background-color: #4caf50;
+    color: white;
+}
+.btn-delete{
+    background-color: #f44336;
+    color: white;
+}
+
+.btn:hover{
+    opacity: 0.7;
+}
+.modal-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.modal-cantant{
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+    min-width: 80%;
+}
+.close-btn{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.btn-attestation {
+  background-color: #2196f3;
+  color: white;
+}
+
+.btn-certificat {
+  background-color: #9c27b0;
+  color: white;
+}
+.filters {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 10px 0;
+  
+}
+
+.filters select {
+  padding: 10px 16px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f5f7fa;
+  color: #333;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.filters select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+  background-color: white;
+}

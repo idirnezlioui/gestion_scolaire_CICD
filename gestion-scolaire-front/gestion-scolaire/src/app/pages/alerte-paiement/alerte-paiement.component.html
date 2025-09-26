@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div class="alert-container">
+  <h2>Alertes de Paiements à Venir</h2>
+
+  @if (paiements.length > 0) {
+    <table class="alert-table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Téléphone</th>
+        <th>Email</th>
+        <th>Niveau</th>
+        <th>Domaine</th>
+        <th>Session</th>
+        <th>Prochain Paiement</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    @for (p of paiements; track p) {
+        <tr>
+            <td>{{ p.nom }}</td>
+            <td>{{ p.prenom }}</td>
+            <td>{{ p.numero_telephone }}</td>
+            <td> {{p.email}} </td>
+            <td>{{ p.niveau }}</td>
+            <td>{{ p.domaine }}</td>
+            <td>{{ p.type_session }}</td>
+            <td>{{ p.date_max_paiement | date: 'dd/MM/yyyy' }}</td>
+            <td><button class="btn-alert" (click)="envoyerEmail(p)">Envoyer Email</button>
+</td>
+
+      </tr>
+
+    }
+      
+    </tbody>
+  </table>
+
+  }
+  
+  @if (paiements.length===0) {
+    <div class="no-data">Aucun paiement prévu cette semaine.</div>
+  }
+
+  
+</div>

@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Ajouter ou modifier une spécialité</h2>
+  <form [formGroup]="formGroup" (submit)="onSubmit()" class="formulaire"> 
+    <div class="form-field">
+      <label for="intitule">Intitulé</label>
+      <input type="text" id="intitule" placeholder="Ex: Informatique" formControlName="intitule" />
+      @if (verificationChamps("intitule")) {
+      <div class="error">Champ invalide</div>
+      }
+    </div>
+    <div class="form-field">
+        <label for="sigle">Sigle</label>
+        <input type="text" id="sigle" placeholder="Ex: INFO" formControlName="sigle_specia"  readonly/>
+        @if (verificationChamps("sigle_specia")) {
+        <div class="error">Champ invalide</div>
+        }
+      </div>
+    <div class="form-button">
+        <button type="submit" [disabled]="formGroup.invalid" class="validation">
+            {{ isEdit ? "Modifier" : "Ajouter" }}
+          </button>
+    </div>
+  </form>
+
+  <!--Liste -->
+
+  <h2>Liste des spécialités</h2>
+
+  <table class="specialite-table">
+    <thead>
+      <tr>
+        <th>Sigle</th>
+        <th>Intitule</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (s of specialites; track s.sigle_specia) {
+      <tr>
+        <td>{{ s.sigle_specia }}</td>
+        <td>{{ s.intitule }}</td>
+        <td>
+          <button (click)="onEdit(s)" class="btn btn-edit">Modifier</button>
+          <button (click)="onDelete(s.sigle_specia)" class="btn btn-delete">
+            Supprimer
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

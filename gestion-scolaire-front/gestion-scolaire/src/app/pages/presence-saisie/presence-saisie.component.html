@@ -1,0 +1,203 @@
+<app-navbar></app-navbar>
+@if (userRole) {
+<div class="student-liste-container">
+  <h2>Feuille de Présence</h2>
+
+  <div class="filters">
+    <select [(ngModel)]="selectedNiveau" (change)="onFilterChange()">
+      <option value="">Tous les niveaux</option>
+      @for (n of niveaux; track n) {
+      <option>{{ n.niveau }}</option>
+      }
+    </select>
+
+    <select [(ngModel)]="selectedDomaine" (change)="onFilterChange()">
+      <option value="">Tous les domaines</option>
+      @for (d of domaines; track d) {
+      <option [value]="d.intitule">{{ d.intitule }}</option>
+      }
+    </select>
+    <select [(ngModel)]="selectedSeance">
+      <option [value]="">Sélectionnez une séance</option>
+      @for (i of seancesCount; track i) {
+      <option [value]="i">Séance {{ i }}</option>
+      }
+    </select>
+  </div>
+
+  <table class="student-table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Cours</th>
+        @for (i of seancesCount; track i) {
+        <th>Séance {{ i }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (etudiant of filteredEtudiants; track etudiant) {
+      <tr>
+        <td>{{ etudiant.nom }}</td>
+        <td>{{ etudiant.prenom }}</td>
+        <td>{{ etudiant.intitule }}</td>
+        @for (i of seancesCount; track i) {
+        <td [ngClass]="{ 'out-of-range': i > etudiant.nombre_seance }">
+          @if ( i<= etudiant.nombre_seance) {
+          <label>
+            <input
+              type="radio"
+              [checked]="
+                presenceData[
+                  getKey(etudiant.num_etudiant!, etudiant.ref_module!, i)
+                ] === 'present'
+              "
+              [disabled]="
+                etudiant.seancesRenseignees?.includes(i) ||
+                (userRole === 'prof' &&
+                  presenceData[
+                    getKey(etudiant.num_etudiant!, etudiant.ref_module!, 0) +
+                      '_seanceAttendue'
+                  ] &&
+                  toNumber(i) !==
+                    toNumber(
+                      presenceData[
+                        getKey(
+                          etudiant.num_etudiant!,
+                          etudiant.ref_module!,
+                          0
+                        ) + '_seanceAttendue'
+                      ]
+                    ))
+              "
+              [name]="
+                'etat_' +
+                etudiant.num_etudiant +
+                '_' +
+                etudiant.ref_module +
+                '_' +
+                i
+              "
+              value="present"
+              (change)="
+                onEtatChange(
+                  etudiant.num_etudiant!,
+                  etudiant.ref_module!,
+                  i,
+                  'present'
+                )
+              "
+            />
+            Présent
+          </label>
+          <label>
+            <input
+              type="radio"
+              [checked]="
+                presenceData[
+                  getKey(etudiant.num_etudiant!, etudiant.ref_module!, i)
+                ] === 'absent'
+              "
+              [disabled]="
+                etudiant.seancesRenseignees?.includes(i) ||
+                (userRole === 'prof' &&
+                  presenceData[
+                    getKey(etudiant.num_etudiant!, etudiant.ref_module!, 0) +
+                      '_seanceAttendue'
+                  ] &&
+                  toNumber(i) !==
+                    toNumber(
+                      presenceData[
+                        getKey(
+                          etudiant.num_etudiant!,
+                          etudiant.ref_module!,
+                          0
+                        ) + '_seanceAttendue'
+                      ]
+                    ))
+              "
+              [name]="
+                'etat_' +
+                etudiant.num_etudiant +
+                '_' +
+                etudiant.ref_module +
+                '_' +
+                i
+              "
+              value="absent"
+              (change)="
+                onEtatChange(
+                  etudiant.num_etudiant!,
+                  etudiant.ref_module!,
+                  i,
+                  'absent'
+                )
+              "
+            />
+            Absent
+          </label>
+
+          @if (etudiant.seancesRenseignees?.includes(i)) {
+          <div class="seance-already-filled" style="margin-top: 5px">
+            <small>Séance déjà renseignée pour cet étudiant</small>
+          </div>
+          }
+
+          <input
+            type="text"
+            class="observation"
+            [name]="
+              'obs_' +
+              etudiant.num_etudiant +
+              '_' +
+              etudiant.ref_module +
+              '_' +
+              i
+            "
+            placeholder="Observation"
+            [value]="
+              presenceData[
+                getKey(etudiant.num_etudiant!, etudiant.ref_module!, i) + '_obs'
+              ] || ''
+            "
+            [disabled]="
+              etudiant.seancesRenseignees?.includes(i) ||
+              (userRole === 'prof' &&
+                presenceData[
+                  getKey(etudiant.num_etudiant!, etudiant.ref_module!, 0) +
+                    '_seanceAttendue'
+                ] &&
+                toNumber(i) !==
+                  toNumber(
+                    presenceData[
+                      getKey(etudiant.num_etudiant!, etudiant.ref_module!, 0) +
+                        '_seanceAttendue'
+                    ]
+                  ))
+            "
+          />
+
+          }
+        </td>
+
+        }
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <button class="btn btn-save" (click)="onSubmit()">
+    Enregistrer les présences
+  </button>
+  @if (userRole!='prof') {
+  <button class="btn btn-secondary" (click)="imprimerPresence()">
+    Imprimer la feuille de présence
+  </button>
+  <button class="btn btn-secondary" (click)="exporterCSV()">
+    Exporter CSV
+  </button>
+  }
+</div>
+
+}

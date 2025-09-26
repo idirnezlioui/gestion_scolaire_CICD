@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<h3>Historique des paiements effectués</h3>
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Utilisateur</th>
+        <th>Étudiant</th>
+        <th>Date de paiement</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (p of paiements; track p) {
+        <tr>
+          <td>{{ p.nom_utilisateur }}</td>
+          <td>{{ p.nom_etudiant }}</td>
+          <td>{{ p.date_paiement | date: 'shortDate' }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

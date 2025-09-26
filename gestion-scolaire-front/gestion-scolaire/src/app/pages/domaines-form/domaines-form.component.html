@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<div class="container" #formRef>
+  <h2>Ajouter ou modifier un domaine</h2>
+  <form   [formGroup]="formGroup" (submit)="onSubmit()" class="formulaire"> 
+    <div class="form-field">
+      <label for="intitule">Intitulé</label>
+      <input type="text" id="intitule" placeholder="Ex: DEV WEB" formControlName="intitule" />
+      @if (verificationChamps("intitule")) {
+      <div class="error">Champ invalide</div>
+      }
+    </div>
+    <div class="form-field">
+        <label for="sigle">Spécialités</label>
+        <select id="sigle" formControlName="sigle_specia">
+            <option value="" disabled selected>-- Choisir une spécialité --</option>
+            @for (s of specialites ; track s) {
+                <option [value]="s.intitule">{{ s.intitule }} </option>
+            }
+                
+           
+          </select>
+        @if (verificationChamps("sigle_specia")) {
+        <div class="error">Champ invalide</div>
+        }
+      </div>
+    <div class="form-button">
+        <button type="submit" [disabled]="formGroup.invalid" class="validation">
+            {{ isEdit ? "Modifier" : "Ajouter" }}
+          </button>
+    </div>
+  </form>
+
+  <!--Liste -->
+
+  <h2>Liste des domaines</h2>
+
+  <table class="specialite-table">
+    <thead>
+      <tr>
+        <th>Ref-domaine</th>
+        <th>intitule domaine</th>
+        <th>Spécialité</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (d of domaines; track d) {
+      <tr>
+        <td>{{d.ref_domaine}}</td>
+        <td>{{d.intitule}}</td>
+        <td>{{d.sigle_specia}}</td>
+        <td>
+            <button class="btn btn-edit" (click)="onEdit(d)">Modifier</button>
+            <button class="btn btn-delete" (click)="onDelete(d.ref_domaine)">Supprimer</button>
+          </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

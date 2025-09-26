@@ -1,0 +1,124 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  
+}
+
+.container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-field label {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .form-button {
+    display: flex;
+    justify-content: center;
+  }
+
+.validation {
+    width: 40%;
+    padding: 12px;
+    background: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.validation:hover{
+    background: #0056b3;
+}
+
+.specialite-table {
+  width: 100%;
+  border-color: collapse;
+  margin-top: 10px;
+}
+
+.specialite-table th,
+.specialite-table td {
+  border-bottom: 2px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.specialite-table th {
+    background-color: #3f51b5;
+    color: white;
+    font-weight: bold;
+  }
+
+  .specialite-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  .specialite-table tr:hover {
+    background-color: #e1e1e1;
+    cursor: pointer;
+  }
+  
+  .btn {
+    padding: 5px 10px;
+    margin: 2px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-edit {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .btn-delete {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .btn:hover {
+    opacity: 0.7;
+  }
+
+  .error{
+    font-size: 12px;
+    color: red;
+    margin-top: 5px;
+}
+input.ng-touched.ng-invalid,
+input.ng-dirty.ng-invalid {
+  border: 2px solid #dc3545;
+  background-color: #ffe6e6;
+  transition: all 0.3s ease;
+}

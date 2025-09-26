@@ -1,0 +1,253 @@
+<app-navbar></app-navbar>
+<div class="title-container">
+
+  <h2>Inscription Étudiant</h2>
+  <p>Remplissez ce formulaire avec soin pour compléter votre inscription.</p>
+</div>
+<div class="container">
+  
+  <div class="main">
+    <form [formGroup]="formGroup" (submit)="onSubmit()" novalidate>
+      <!-- Civilité -->
+<div class="form-field">
+  <label>Civilité</label>
+  <mat-radio-group formControlName="civilite">
+    <mat-radio-button value="HOMME">Homme</mat-radio-button>
+    <mat-radio-button value="FEMME">Femme</mat-radio-button>
+  </mat-radio-group>
+  @if (verificationChamp('civilite')) {
+    <div class="error">Civilité requise</div>
+  }
+      </div>
+
+      <div class="form-field">
+  <label for="num_etudiant">Numéro étudiant</label>
+  <input
+    type="text"
+    name="num_etudiant"
+    id="num_etudiant"
+    formControlName="num_etudiant"
+    placeholder="ex: 2418801"
+  />
+  @if (verificationChamp("num_etudiant")) {
+    <div class="error">
+      @if (formGroup.get('num_etudiant')?.errors?.['required']) {
+        Numéro étudiant requis.
+      }
+      @if (formGroup.get('num_etudiant')?.errors?.['pattern']) {
+        Numéro invalide (chiffres uniquement).
+      }
+    </div>
+  }
+</div>
+
+      <!--nom-->
+      <div class="form-field">
+        <label for="nom">Name</label>
+        <input type="text" name="nom" id="nom" formControlName="nom" />
+        @if (verificationChamp("nom")) {
+          <div class="error">
+            @if (formGroup.get('nom')?.errors?.['required']) {
+              Nom est requis.
+            }
+            @if (formGroup.get('nom')?.errors?.['minlength']) {
+              Nom trop court (minimum 2 caractères).
+            }
+            @if (formGroup.get('nom')?.errors?.['pattern']) {
+              Nom invalide (lettres uniquement).
+            }
+          </div>
+}
+      </div>
+
+      <!--prenom-->
+      <div class="form-field">
+        <label for="prenom">Prénom</label>
+        <input type="text" name="prenom" id="prenom" formControlName="prenom" />
+        @if (verificationChamp("prenom")) {
+        <div class="error">Champ invalide</div>
+        }
+      </div>
+
+      <!--date de naissance-->
+      <div class="form-field">
+        <label for="date_naiss">Date de naissance</label>
+        <input
+          type="date"
+          name="date_naiss"
+          id="date_naiss"
+          formControlName="date_naiss"
+        />
+        @if (verificationChamp("date_naiss")) {
+        <div class="error">champ invalide</div>
+        }
+      </div>
+      
+      <div class="form-field">
+  <label for="email">Email</label>
+  <input type="email" name="email" id="email" formControlName="email" />
+  @if (verificationChamp("email")) {
+    <div class="error">
+      @if (formGroup.get('email')?.errors?.['required']) {
+        Email requis.
+      }
+      @if (formGroup.get('email')?.errors?.['email']) {
+        Format d'email invalide.
+      }
+    </div>
+  }
+</div>
+<div class="form-field">
+  <label for="numero_telephone">Numéro de téléphone</label>
+  <input type="text" name="numero_telephone" id="numero_telephone" formControlName="numero_telephone" />
+  @if (verificationChamp("numero_telephone")) {
+    <div class="error">
+      @if (formGroup.get('numero_telephone')?.errors?.['required']) {
+        Numéro requis.
+      }
+      @if (formGroup.get('numero_telephone')?.errors?.['pattern']) {
+        Le numéro doit contenir exactement 10 chiffres.
+      }
+    </div>
+  }
+</div>
+<!-- Adresse postale -->
+<div class="form-field">
+  <label for="adresse_postale">Adresse postale</label>
+  <textarea
+    id="adresse_postale"
+    name="adresse_postale"
+    rows="2"
+    formControlName="adresse_postale"
+    placeholder="N°, rue, ville, code postal"
+  ></textarea>
+</div>
+
+
+      <!--Lieu de naissance-->
+      <div class="form-field">
+        <label for="lieu_naiss">Lieu de naissance</label>
+        <input
+          type="text"
+          name="lieu_naiss"
+          id="lieu_naiss"
+          formControlName="lieu_naiss"
+        />
+        @if (verificationChamp("lieu_naiss")) {
+        <div class="error">Champ invalide</div>
+        }
+      </div>
+
+      <!--nationalite-->
+      <div class="form-field">
+  <label for="nationalite">Nationalité</label>
+  <mat-form-field appearance="outline">
+    <mat-select formControlName="nationalite" panelClass="custom-panel" placeholder="Choix Nationalité">
+      <mat-option disabled>Choix Nationalité</mat-option>
+      @for (nat of nationalite; track nat) {
+        <mat-option  [value]="nat">{{ nat }}</mat-option>
+      }
+      
+    </mat-select>
+  </mat-form-field>
+  @if (verificationChamp("nationalite")) {
+    <div class="error">Veuillez choisir une nationalité</div>
+  }
+</div>
+
+      <!--domaine-->
+      <div class="form-field">
+        <label for="intitule_domaine">Domaine </label>
+        <select
+          name="intitule_domaine"
+          id="intitule_domaine"
+          formControlName="intitule_domaine"
+        >
+          <option disabled>Chois spécialites</option>
+          @for (dom of domaines; track dom) {
+          <option [value]="dom.intitule">{{ dom.intitule }}</option>
+          }
+        </select>
+        @if (verificationChamp("sigle_specia")) {
+        <div class="error">Sélection requise</div>
+        }
+      </div>
+
+      <!--Niveau-->
+      <div class="form-field">
+        <label for="niveau">Niveaux</label>
+        <select name="niveau" id="niveau" formControlName="niveau">
+          <option disabled>Chois niveaux</option>
+          @for (niv of niveau; track niv) {
+          <option [value]="niv.niveau">{{ niv.niveau }}</option>
+          }
+        </select>
+        @if (verificationChamp("niveau")) {
+        <div class="error">veuillez choisire un niveau</div>
+        }
+      </div>
+
+      <!--Session-->
+      <div class="form-field">
+        <label for="type_session">Session</label>
+        <select name="type_session" id="type_session" formControlName="type_session">
+          <option disabled>Chois spécialites</option>
+          @for (sess of session; track sess.id_session) {
+          <option [value]="sess.type_session">{{ sess.type_session }}- {{ sess.annee }}</option>
+          }
+        </select>
+        @if (verificationChamp("type_session")) {
+        <div class="error">veuillez choisire une session</div>
+        }
+      </div>
+      <!-- Mot de passe -->
+<div class="form-field">
+  <label for="mot_de_passe">Mot de passe</label>
+  <input
+    type="password"
+    id="mot_de_passe"
+    formControlName="mot_de_passe"
+    placeholder="Entrez un mot de passe"
+  />
+  @if (verificationChamp("mot_de_passe")) {
+    <div class="error">Mot de passe requis (min. 6 caractères)</div>
+  }
+</div>
+
+<!-- Confirmation -->
+<div class="form-field">
+  <label for="confirmer_mot_de_passe">Confirmer le mot de passe</label>
+  <input
+    type="password"
+    id="confirmer_mot_de_passe"
+    formControlName="confirmer_mot_de_passe"
+    placeholder="Confirmez le mot de passe"
+  />
+  @if (verificationChamp("confirmer_mot_de_passe")) {
+    <div class="error">La confirmation est obligatoire</div>
+  }
+</div>
+
+      <!--date de insecription-->
+      <div class="form-field">
+        <label for="date_inse">Date d'insecription</label>
+        <input
+          type="date"
+          name="date_inse"
+          id="date_inse"
+          formControlName="date_inse"
+        />
+        @if (verificationChamp("date_inse")) {
+        <div class="error">champ invalide</div>
+        }
+      </div>
+
+     
+
+      <button type="submit" [disabled]="formGroup.invalid">Save</button>
+    </form>
+  </div>
+  <div class="preview">
+    <app-student-fiche [etudiant]="etudiantPreview"></app-student-fiche>
+  </div>
+</div>

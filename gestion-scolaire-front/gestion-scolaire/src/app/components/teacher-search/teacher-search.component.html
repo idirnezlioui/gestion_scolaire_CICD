@@ -1,0 +1,30 @@
+<div class="search-card">
+  <h3>Rechercher un enseignant</h3>
+  <div class="search-fields">
+    <input
+      type="number"
+      placeholder="Par matricule..."
+      [(ngModel)]="searchId"
+      (input)="searchById()"
+    />
+    <input
+      type="text"
+      placeholder="Par nom ou prénom..."
+      [(ngModel)]="searchterm"
+      (input)="searchByName()"
+    />
+  </div>
+
+  <div class="teacher-list" *ngIf="showDropdown && filterProfs.length">
+    <ul>
+      @for (prof of filterProfs; track prof) {
+        <li (click)="selectProf(prof)">
+          {{ prof.nom }} {{ prof.prenom }} (ID: {{ prof.id_prof }})
+        </li>
+      }
+      
+    </ul>
+  </div>
+  
+</div>
+

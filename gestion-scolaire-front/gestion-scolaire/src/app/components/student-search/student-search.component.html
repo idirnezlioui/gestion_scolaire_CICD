@@ -1,0 +1,28 @@
+<div class="search-card">
+  <h3>Rechercher un étudiant</h3>
+  <div class="search-fields">
+    <input
+      type="number"
+      placeholder="Par matricule..."
+      [(ngModel)]="searchId"
+      (input)="searchById()"
+    />
+    <input
+      type="text"
+      placeholder="Par nom ou prénom..."
+      [(ngModel)]="searchterm"
+      (input)="searchByName()"
+    />
+  </div>
+
+  <div class="student-list" *ngIf="showDropdown && filterEtudiant.length">
+    <ul>
+      @for (student of filterEtudiant; track student) {
+        <li (click)="selectStudent(student)">
+          {{ student.nom }} {{ student.prenom }} (ID: {{ student.num_etudiant }})
+        </li>
+      }
+      
+    </ul>
+  </div>
+</div>

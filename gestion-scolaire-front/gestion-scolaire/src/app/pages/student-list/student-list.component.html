@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+<div class="student-liste-container">
+  <h2>Liste des Étudiants</h2>
+  <div class="filters">
+  <select [(ngModel)]="selectedNiveau" (change)="applyFilters()">
+    <option value="">Tous les niveaux</option>
+    @for (n of niveaux; track n) {
+    <option >{{ n.niveau }}</option>
+    }
+  </select>
+
+  <select [(ngModel)]="selectedDomaine" (change)="applyFilters()">
+    <option value="">Tous les domaines</option>
+    @for (d of domaines; track d) {
+    <option  [value]="d.intitule">{{ d.intitule }}</option>
+    }
+  </select>
+
+  <select [(ngModel)]="selectedSession" (change)="applyFilters()">
+    <option value="">Toutes les sessions</option>
+    @for (s of sessions; track s) {
+    <option [value]="s.type_session">{{ s.type_session }}</option>
+    }
+  </select>
+</div>
+
+  <table class="student-table">
+    <thead>
+      <tr>
+        <th>Identifiant</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Niveau</th>
+        <th>Date d'Inscription</th>
+        <th>Numérou de téléphone</th>
+        <th>Email</th>
+        <th>Domaine</th>
+        <th>Session</th>
+        @if (!isProf) {
+          <th>Action</th>
+        }
+        
+      </tr>
+    </thead>
+    <tbody>
+      @for (student of etudinats; track student) {
+      <tr>
+        <td>{{ student.num_etudiant }}</td>
+        <td>{{ student.nom }}</td>
+        <td>{{ student.prenom }}</td>
+        <td>{{ student.niveau }}</td>
+        <td>{{ student.date_inse }}</td>
+        <td>{{ student.numero_telephone }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.domaine }}</td>
+        <td>{{ student.type_session }}</td>
+        @if (!isProf) {
+          <td>
+          <button class="btn btn-edit" (click)="editStudent(student.num_etudiant)">Modifier</button>
+          <button class="btn btn-delete" (click)="goToPaiement(student)">Payé</button>
+          <button class="btn btn-attestation" (click)="imprimerAttestation(student)">Attestation</button>
+          <button class="btn btn-certificat" (click)="imprimerCertificat(student)">Certificat</button>
+        </td>
+
+        }
+        
+      </tr>
+
+      }
+    </tbody>
+  </table>
+</div>

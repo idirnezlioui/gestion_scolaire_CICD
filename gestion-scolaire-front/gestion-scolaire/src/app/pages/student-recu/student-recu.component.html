@@ -1,0 +1,19 @@
+@if (etudiant) {
+<div class="recu-container" id="print-section">
+  <h2>Reçu de paiments</h2>
+  <p>Ecole : Golden collar</p>
+  <p>
+    Nom : {{ etudiant.nom || "Votre nom" }} {{ etudiant.prenom || "Prenom" }}
+  </p>
+  <p>Id Etudiant: {{ etudiant.num_etudiant }}</p>
+  <p>Date de Paiment : {{ paiement.date_paiement }}</p>
+  <p>Montant payé : {{ paiement.montant_paye }}</p>
+  <p>Solde restant : {{ paiement.solde_restant }}</p>
+  <p>Statue : {{ paiement.statut_paiment }}</p>
+  <p>Date du prochain paiement : {{ paiement.date_max_paiement }}</p>
+
+  <p>Remise : {{ paiement.remise }}</p>
+
+  <button (click)="imprimerRecu()">Imprimer le reçu</button>
+</div>
+}

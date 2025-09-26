@@ -1,0 +1,89 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Ajouter ou modifier une session</h2>
+  <form [formGroup]="formGroup" (submit)="onSubmit()" class="formulaire">
+    <div class="form-field">
+      <label for="date_deb">Date début</label>
+      <input type="date" id="date_deb" formControlName="date_deb" />
+      @if (verificationChamps("date_deb")) {
+      <div class="error">Champ invalide</div>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="date_fin">Date fin</label>
+      <input type="date" id="date_fin" formControlName="date_fin" />
+      @if (verificationChamps("date_fin")) {
+      <div class="error">Champ invalide</div>
+      } @if (formGroup.errors?.['validationDate']) {
+      <div class="error">
+        La date de fin doit être au moins 3 mois après la date de début.
+      </div>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="annee">Année</label>
+      <input
+        type="text"
+        id="annee"
+        placeholder="2025"
+        formControlName="annee"
+      />
+      @if (verificationChamps("annee")) {
+      <div class="error">Champ invalide</div>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="type_session">Type</label>
+      <select id="type_session" formControlName="type_session">
+        <option value="">-- Sélectionner --</option>
+        @for (t of typeOptions ;track t) {
+        <option [value]="t">{{ t }}</option>
+        }
+      </select>
+      @if (verificationChamps("type_session")) {
+      <div class="error">Champ invalide</div>
+      }
+    </div>
+
+    <div class="form-button">
+      <button type="submit" [disabled]="formGroup.invalid" class="validation">
+        {{ isEdit ? "Modifier" : "Ajouter" }}
+      </button>
+    </div>
+  </form>
+
+  <!-- Liste -->
+
+  <h2>Liste des sessions</h2>
+
+  <table class="specialite-table">
+    <thead>
+      <tr>
+        <th>Date début</th>
+        <th>Date fin</th>
+        <th>Année</th>
+        <th>Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (s of sessions; track s.id_session) {
+      <tr>
+        <td>{{ s.date_deb | date : "dd/MM/yyyy" }}</td>
+        <td>{{ s.date_fin | date : "dd/MM/yyyy" }}</td>
+        <td>{{ s.annee }}</td>
+        <td>{{ s.type_session }}</td>
+        <td>
+          <button (click)="onEdit(s)" class="btn btn-edit">Modifier</button>
+          <button (click)="onDelete(s.id_session!)" class="btn btn-delete">
+            Supprimer
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

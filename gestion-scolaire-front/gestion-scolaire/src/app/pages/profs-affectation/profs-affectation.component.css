@@ -1,0 +1,157 @@
+.affectation-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f7f9fc;
+  border-radius: 12px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #222;
+  font-size: 28px;
+}
+
+.affectation-form .card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+.card-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.grid {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkbox-list label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0f4ff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.checkbox-list label:hover {
+  background: #dce7ff;
+}
+
+.btn-save {
+  display: block;
+  margin: 30px auto 0;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 26px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-save:hover {
+  background: #0056b3;
+}
+
+.affectation-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.affectation-container h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.affectation-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.affectation-table th,
+.affectation-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.affectation-table th {
+  background-color: #e9ecef;
+  color: #212529;
+}
+
+.affectation-table tr:hover {
+  background-color: #f1f3f5;
+}
+
+.btn-supprimer {
+  background-color: #dc3545;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-supprimer:hover {
+  background-color: #c82333;
+}
+.btn-imprimer {
+  background-color: #28a745; 
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s ease-in-out;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.btn-imprimer:hover {
+  background-color: #218838;
+}
+
+.btn-imprimer:active {
+  background-color: #1e7e34;
+}
+
+.btn-imprimer:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.4);
+}
+.footer-btn {
+  text-align: center;
+  margin-top: 20px;
+}

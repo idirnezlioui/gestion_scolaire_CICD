@@ -1,0 +1,59 @@
+
+<div class="fiche-etudiant" >
+    <div class="fiche-header">
+        <h2>Fiche de renseignement personnels</h2>
+        <div class="img-etudiant">
+            @if (etudiant.image) {
+                <img  [src]="'/uploads/' + etudiant.image" width="150" />
+            }
+        </div>
+    </div>
+    <div class="renseignement">
+        <div class="rens">
+            <h4>Nom ,Prenom</h4>
+            <p> {{etudiant.nom || 'votre nom'}} {{ etudiant.prenom || " et prenom"}} </p>
+        </div>
+        <div class="rens">
+            <h4>Date de Naissance</h4>
+            <p> {{etudiant.date_naiss || "date de naissance"}} </p>
+        </div>
+        <div class="rens">
+            <h4>Lieu de Naissance</h4>
+            <p> {{etudiant.lieu_naiss || "lieu de naissance"}} </p>
+        </div>
+        <div class="rens">
+            <h4>numero_telephone</h4>
+            <p> {{etudiant.numero_telephone ||"numerou de téléphone"}} </p>
+        </div>
+        <div class="rens">
+            <h4>Email</h4>
+            <p> {{etudiant.email || "e-mail"}} </p>
+        </div>
+        <div class="rens">
+            <h4>Nationalite</h4>
+            <p> {{etudiant.nationalite || "Nationalite"}} </p>
+        </div>
+        <div class="rens">
+            <h4>Niveau</h4>
+            <p> {{etudiant.niveau || "niveau"}} </p>
+        </div>
+        <div class="rens">
+            <h4>Domaine</h4>
+            <p> {{etudiant.domaine}} </p>
+        </div>
+        <div class="rens">
+            <h4>Session</h4>
+            <p> {{etudiant.type_session || "session"}} </p>
+        </div>
+        <div class="rens">
+            <h4>Date d'insecription</h4>
+            <p> {{etudiant.date_inse || "insecri le "}} </p>
+        </div>
+    </div>
+    <div class="fiche-bottom">
+        <h4>Date et Signature</h4>
+        <p> {{currentDate}} </p>
+    </div>
+   
+    
+</div>

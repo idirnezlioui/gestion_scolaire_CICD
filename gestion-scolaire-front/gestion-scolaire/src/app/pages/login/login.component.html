@@ -1,0 +1,41 @@
+<div class="login-page">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+    <div class="login-logo">
+  <img src="img/logoEcole.png" alt="Logo" />
+</div>
+<p class="login-subtitle">Bienvenue sur le système de gestion scolaire</p>
+    <h2>Connexion</h2>
+
+    <input type="email" formControlName="mail" placeholder="Email" required />
+    <div class="password-container">
+  <input
+    [type]="showPassword ? 'text' : 'password'"
+    formControlName="mot_pass"
+    placeholder="Mot de passe"
+    required
+  />
+  <img
+    src="img/{{ showPassword ? 'cacher.png' : 'oeil.png' }}"
+    (click)="togglePasswordVisibility()"
+    alt="Afficher / Cacher le mot de passe"
+    class="password-toggle"
+  />
+</div>
+
+
+    <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+
+
+    <button type="submit" [disabled]="loginForm.invalid || loading">@if (loading) {
+    <span class="spinner"></span> Connexion...
+  } @else {
+    Se connecter
+  }</button>
+
+
+    @if (errorMessage) {
+      <p class="error">{{ errorMessage }}</p>
+    }
+  </form>
+</div>

@@ -1,0 +1,246 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; 
+  width: 99%; 
+  margin: 0 auto;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #2874a6;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+  border-radius: 8px;
+}
+
+
+.navbar-logo {
+  margin-right: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #00bcd4;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 40px; /* espace entre les éléments */
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-menu > li {
+  position: relative;
+}
+
+.navbar-menu a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  display: block;
+  transition: background 0.2s ease;
+  font-size: 15px;
+}
+
+.navbar-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #2e86c1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 180px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-menu li a {
+  padding: 10px 16px;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  z-index: 1000;
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-submenu-list {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  display: none;
+  background-color: #5dade2;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-submenu:hover > .dropdown-submenu-list {
+  display: block;
+}
+.dropdown-submenu-list {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  white-space: nowrap;
+  background-color: #1f1f1f;
+  min-width: 180px;
+  border-radius: 6px;
+  display: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+
+.dropdown-submenu:hover .dropdown-submenu-list {
+  display: block;
+  left: auto;
+  right: 100%;
+}
+
+.dropdown-submenu.adjust-left:hover > .dropdown-submenu-list {
+  left: auto;
+  right: 100%;
+}
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  z-index: 1001;
+}
+
+.menu-toggle img {
+  width: 32px;
+  height: 32px;
+  filter: invert(100%); /* pour rendre blanc sur fond bleu */
+}
+
+.admin-highlight {
+  font-weight: 600;
+  font-size: 15.5px;
+  padding: 10px 16px;
+  color: #ffeb3b; /* Jaune doux pour contraster */
+}
+
+.admin-highlight a {
+  color: #ffffff !important;
+}
+
+.admin-highlight a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+}
+.logout-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  margin-left: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #e74c3c;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid #e74c3c;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: rgba(231, 76, 60, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(231, 76, 60, 0.3);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
+}
+
+.logout-button img {
+  width: 20px;
+  height: 20px;
+  filter: invert(40%) sepia(100%) saturate(600%) hue-rotate(-10deg);
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #2874a6;
+    border-radius: 0 0 8px 8px;
+    margin-top: 10px;
+    padding: 10px 0;
+  }
+
+  .navbar-menu.open {
+    display: flex;
+  }
+
+  .navbar-menu > li {
+    width: 100%;
+  }
+
+  .navbar-menu a {
+    padding: 12px 20px;
+    width: 100%;
+  }
+}
+.notification-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notification-icon img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.notification-icon:hover img {
+  transform: scale(1.1);
+}
+
+.notif-text {
+  font-size: 14px;
+  color: white;
+  font-weight: 500;
+}

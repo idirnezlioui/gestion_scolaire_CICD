@@ -1,0 +1,58 @@
+.search-card {
+  background: #fff;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+}
+
+.search-card h3 {
+  margin-bottom: 12px;
+  font-size: 22px;
+  color: #111;
+}
+
+.search-fields {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search-fields input {
+  flex: 1 1 45%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.search-fields input:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.2);
+}
+
+.teacher-list {
+  margin-top: 12px;
+}
+
+.teacher-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #f2f2f2;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-list li {
+  padding: 10px 16px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.teacher-list li:hover {
+  background: #e9e9e9;
+}

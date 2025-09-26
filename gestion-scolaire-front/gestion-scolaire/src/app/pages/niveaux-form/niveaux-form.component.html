@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Ajouter ou modifier un niveau</h2>
+
+ <form class="formulaire" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label for="niveau">Niveau*</label>
+      <input id="niveau" type="text" formControlName="niveau" />
+    </div>
+
+    <div class="form-field">
+      <label for="tarifs">Tarif (€)*</label>
+      <input id="tarifs" type="number" formControlName="tarifs" />
+    </div>
+
+    <div class="form-button">
+      <button class="add" type="submit" >
+        {{ isEdit ? 'Modifier' : 'Ajouter' }}
+      </button>
+
+      @if (isEdit) {
+        <button class="cancel" type="button" (click)="cancel()">Annuler</button>
+      }
+    </div>
+ </form>
+
+  <h3>Liste des niveaux</h3>
+  <table class="niveau-table">
+    <thead>
+      <tr>
+        <th>Identifiants</th>
+        <th>Niveau</th>
+        <th>Tarif</th>
+        <th>Actions</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      @for (n of niveaux; track n.id_niveau) {
+        <tr>
+            <td>{{ n.id_niveau}}</td>
+          <td><strong>{{ n.niveau }}</strong></td>
+          <td>{{ n.tarifs }} €</td>
+          
+          <td>
+            <button class="btn btn-edit" (click)="onEdit(n)">Modifier</button>
+            <button class="btn btn-delete" (click)="onDelete(n.id_niveau!)">Supprimer</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

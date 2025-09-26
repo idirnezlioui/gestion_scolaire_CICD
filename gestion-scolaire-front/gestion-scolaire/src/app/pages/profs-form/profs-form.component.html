@@ -1,0 +1,78 @@
+<app-navbar></app-navbar>
+<div class="title-container">
+  <h2>Ajout d'un Professeur</h2>
+  <p>Remplissez le formulaire pour ajouter un professeur.</p>
+</div>
+
+<div class="container">
+  <div class="main">
+    <form [formGroup]="formGroup" (submit)="submit($event)" novalidate>
+      <div class="form-field">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" formControlName="nom" />
+        @if (isInvalid("nom")) {
+        <div class="error">Nom requis</div>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="prenom">Prénom</label>
+        <input type="text" id="prenom" formControlName="prenom" />
+        @if (isInvalid("prenom")) {
+        <div class="error">Prénom requis</div>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" />
+        @if (isInvalid("email")) {
+          <div class="error">
+          @if (formGroup.get('email')?.errors?.['required']) {
+            Email requis.
+          }
+          @if (formGroup.get('email')?.errors?.['email']) {
+            Format d'email invalide.
+          }
+        </div>
+}
+
+      </div>
+
+      <div class="form-field">
+        <label for="numero_telephone">Numéro de téléphone</label>
+        <input
+          type="text"
+          id="numero_telephone"
+          formControlName="numero_telephone"
+        />
+        @if (isInvalid("numero_telephone")) {
+  <div class="error">
+    @if (formGroup.get('numero_telephone')?.errors?.['required']) {
+      Numéro requis.
+    }
+    @if (formGroup.get('numero_telephone')?.errors?.['pattern']) {
+      Doit contenir exactement 10 chiffres.
+    }
+  </div>
+}
+
+      </div>
+
+      <div class="form-field">
+        <label for="domaine_enseignement">Domaine enseigné</label>
+        <input
+          type="text"
+          id="domaine_enseignement"
+          formControlName="domaine_enseignement"
+        />
+
+        @if (isInvalid("domaine_enseignement")) {
+        <div class="error">Domaine requis</div>
+        }
+      </div>
+
+      <button type="submit" [disabled]="formGroup.invalid">Ajouter</button>
+    </form>
+  </div>
+</div>

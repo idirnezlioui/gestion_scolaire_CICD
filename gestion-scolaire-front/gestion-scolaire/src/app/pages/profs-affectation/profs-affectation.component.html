@@ -1,0 +1,103 @@
+<app-navbar></app-navbar>
+
+<div class="affectation-container">
+  <h2>Affectation d'Enseignant</h2>
+
+  <app-teacher-search
+    (profSelected)="onProfSelected($event)"
+  ></app-teacher-search>
+
+  @if (selectedProf) {
+  <div class="affectation-form">
+    <div class="card">
+      <div class="card-header">
+        Affectation pour :
+        <strong>{{ selectedProf.nom }} {{ selectedProf.prenom }}</strong>
+      </div>
+
+      <form (ngSubmit)="submitAffectation()">
+        <div class="grid">
+          <div class="column">
+            <h4>Modules :</h4>
+            <div class="checkbox-list">
+              @for (mod of modules; track mod.ref_module) {
+              <label>
+                <input
+                  type="checkbox"
+                  (change)="toggleModule(mod.ref_module)"
+                  [checked]="selctedModule.includes(mod.ref_module)"
+                />
+                {{ mod.intitule }}
+              </label>
+              }
+            </div>
+          </div>
+
+          <div class="column">
+            <h4>Niveaux :</h4>
+            <div class="checkbox-list">
+              @for (niv of niveaux; track niv.id_niveau) {
+              <label>
+                <input
+                  type="checkbox"
+                  (change)="toggleNiveau(niv.id_niveau)"
+                  [checked]="selectedNiveaux.includes(niv.id_niveau)"
+                />
+                {{ niv.niveau }}
+              </label>
+              }
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-save">
+          Enregistrer l'affectation
+        </button>
+      </form>
+    </div>
+  </div>
+  }
+
+  @if (selectedProf) {
+    <div class="affectation-container">
+    <div class="card-header">
+        Affectation Actuelle pour l'ensignant : 
+        <strong>{{ selectedProf.nom }} {{ selectedProf.prenom }}</strong>
+      </div>
+    <table class="affectation-table">
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>Niveau</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (affectation of affectationsActuelles; track affectation) {
+        <tr>
+          <td>{{ getModuleLabel(affectation.ref_module) }}</td>
+          <td>{{ getNiveauLabel(affectation.id_niveau) }}</td>
+          <td>
+            
+            <button
+              class="btn-supprimer"
+              (click)="retirerAffectation(affectation)"
+            >
+              Supprimer
+            </button>
+          </td>
+        </tr>
+        }
+        
+      </tbody>
+    </table>
+    <div class="footer-btn">
+  <button class="btn-imprimer" (click)="imprimerFicheProf()">
+     Imprition fiche Enseignant
+  </button>
+</div>
+
+  </div>
+  }
+  
+</div>

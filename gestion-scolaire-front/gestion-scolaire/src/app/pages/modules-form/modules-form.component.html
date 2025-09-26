@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Ajouter ou modifier un module</h2>
+  <form [formGroup]="formGroup" (submit)="onSubmit()" class="formulaire">
+    <div class="form-field">
+      <label for="intitule">Intitulé</label>
+      <input
+        type="text"
+        id="intitule"
+        placeholder="Ex: Algorithmes"
+        formControlName="intitule"
+      />
+      @if (verificationChamps("intitule")) {
+      <div class="error">Champ invalide</div>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="nbr_heures">Nombre d'heures</label>
+      <input type="number" id="nbr_heures" formControlName="nbr_heures" />
+      @if (verificationChamps("nbr_heures")) {
+      <div class="error">Champ invalide</div>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="nbr_seances">Nombre de séances</label>
+      <input type="number" id="nbr_seances" formControlName="nbr_seances" />
+      @if (verificationChamps("nbr_seances")) {
+      <div class="error">Champ invalide</div>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="type">Type</label>
+      <select id="type" formControlName="type">
+        <option value="">-- Choisir un type --</option>
+        <option value="cours">Cours</option>
+        <option value="examen">Examen</option>
+        <option value="td">Travaux dirigés</option>
+        <option value="tp">Travaux pratiques</option>
+      </select>
+      @if (verificationChamps("type")) {
+      <div class="error">Champ invalide</div>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="domaine">Domaine</label>
+      <select id="domaine" formControlName="domaine">
+        <option value="">-- Choisir un domaine --</option>
+        @for (d of domaines; track d.ref_domaine) {
+        <option [value]="d.ref_domaine">{{ d.intitule }}</option>
+        }
+      </select>
+      @if (verificationChamps("domaine")) {
+      <div class="error">Champ invalide</div>
+      }
+    </div>
+
+    <div class="form-button">
+      <button type="submit" [disabled]="formGroup.invalid" class="validation">
+        {{ isEdit ? "Modifier" : "Ajouter" }}
+      </button>
+    </div>
+  </form>
+
+  <!-- Liste des modules -->
+  <h2>Liste des modules</h2>
+  <table class="specialite-table">
+    <thead>
+      <tr>
+        <th>Intitulé</th>
+        <th>Heures</th>
+        <th>Séances</th>
+        <th>Type</th>
+        <th>Domaine</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (m of modules; track m.ref_module) {
+      <tr>
+        <td>{{ m.intitule }}</td>
+        <td>{{ m.nbr_heures }}</td>
+        <td>{{ m.nbr_seances }}</td>
+        <td>{{ m.type }}</td>
+        <td>{{ m.domaine }}</td>
+        <td>
+          <button class="btn btn-edit" (click)="onEdit(m)">Modifier</button>
+          <button class="btn btn-delete" (click)="onDelete(m.ref_module!)">
+            Supprimer
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

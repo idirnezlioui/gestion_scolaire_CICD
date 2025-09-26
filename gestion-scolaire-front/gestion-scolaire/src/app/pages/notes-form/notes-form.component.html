@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+
+<div class="notes-wrapper">
+  <h2>Relevé de Notes</h2>
+
+  <div class="notes-container">
+    <app-student-search
+      (studentSelected)="onStudentSelected($event)"
+    ></app-student-search>
+    <div id="releve-section">
+      @if (selectedStudent) {
+      <div class="student-summary">
+        <p>
+          <strong>Nom :</strong> {{ selectedStudent.nom }}
+          {{ selectedStudent.prenom }}
+        </p>
+        <p><strong>Matricule :</strong> {{ selectedStudent.num_etudiant }}</p>
+        <p><strong>Niveau :</strong> {{ selectedStudent.niveau }}</p>
+        <p>
+          <strong>intitule domaine :</strong> {{ selectedStudent.domaine }}
+        </p>
+        <p>
+          <strong>intitule domaine :</strong> {{ selectedStudent.type_session }}
+        </p>
+      </div>
+      }
+
+      <form
+        [formGroup]="formGroup"
+        (ngSubmit)="enregistrerNotes()"
+        class="notes-form"
+      >
+        <table class="notes-table" formArrayName="notes">
+          <thead>
+            <tr>
+              <th>Module</th>
+              <th>Note (/20)</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (ctrl of notesArray.controls; track $index) {
+            <tr
+              [formGroupName]="$index"
+              [ngClass]="getNoteClass(ctrl.value.note)"
+            >
+              <td>{{ ctrl.value.intitule }}</td>
+              <td>
+                <input type="number" formControlName="note" min="0" max="20" />
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+
+        <div class="notes-footer">
+          <p class="moyenne">
+            Moyenne : <strong>{{ moyenne | number : "1.2-2" }}</strong> / 20
+          </p>
+          <button type="submit" class="btn-save" [disabled]="formGroup.invalid">
+            💾 Enregistrer
+          </button>
+          @if (!isProf) {
+            <button class="btn-save" type="button" (click)="genererReleve()">
+            📄 Relevé de notes
+          </button>
+           <button class="btn-save" type="button" (click)="genererEtUploaderPDF()">
+              📥 Ajouter dans les documents
+            </button>
+          }
+          
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

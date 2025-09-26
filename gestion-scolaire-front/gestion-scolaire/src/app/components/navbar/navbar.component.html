@@ -1,0 +1,111 @@
+<nav class="navbar">
+  <div class="navbar-logo">CampusManager</div>
+   <div class="menu-toggle" (click)="toggleMenu()">
+    <img src="img/menu-burger.svg" alt="" srcset="">
+  </div>
+
+  <ul class="navbar-menu" [class.open]="menuOpen">
+    @if (!isProf) {
+    <li class="dropdown">
+      <a routerLink="/students/form">Etudiants</a>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/students">Étudiant inscrit</a></li>
+        <li><a routerLink="/students/form">Insecrire un étudiant</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a routerLink="/profs/form">Enseignant</a>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/profs/form">Ajouter Enseignant</a></li>
+        <li><a routerLink="/profs/liste">Liste des Enseignants</a></li>
+        <li><a routerLink="/profs/affectation">Affectation</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a outerLink="/student/paiment">Paiements</a>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/student/paiment">Effectuer un paiement</a></li>
+        <li><a routerLink="/paiement/etat">Consulter état des paiements</a></li>
+      </ul>
+    </li>
+    }
+    
+      <li class="dropdown">
+      <a routerLink="/notes/form">Notes</a>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/notes/form">Relevé de notes</a></li>
+        <li><a routerLink="/notes/form">imprimer relevé</a></li>
+      </ul>
+    </li>
+    
+    @if (!isProf) {
+      <li class="dropdown">
+      <a routerLink="/students">Documents</a>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/note/impression">Imprimer un reçu</a></li>
+      </ul>
+    </li>
+    }
+    
+    
+      <li class="dropdown">
+      <a routerLink="/presence">Présence</a>
+    </li>
+    
+    
+@if (!isProf) {
+  <li class="dropdown">
+  <a>Àpropos</a>
+  <ul class="dropdown-menu">
+    @for (menu of aproposOptions; track menu.label) {
+      <li class="dropdown-submenu ">
+        <a>{{ menu.label }} ▸</a>
+        <ul class="dropdown-submenu-list">
+          @for (item of menu.children; track item.label) {
+            <li><a [routerLink]="item.link">{{ item.label }}</a></li>
+          }
+        </ul>
+      </li>
+    }
+  </ul>
+</li>
+<li class="dropdown notification-icon" (click)="navigaTo('/alertes/paiement')">
+  <a >
+    <img src="img/alerte.png" alt="Notification" />
+    <span class="notif-text">Alertes</span>
+  </a>
+</li>
+
+
+}
+@if (isAdmin) {
+  <li class="dropdown admin-highlight">
+  <a routerLink="/utilisateurs">Personnel</a>
+</li>
+  
+}
+
+
+@if (isAdmin) {
+  <li class="dropdown admin-highlight">
+  <a routerLink="/historique/ajout-etudiant">Historique actions</a>
+  <ul class="dropdown-menu">
+    <li><a routerLink="/historique/ajout-etudiant">Ajouts d’étudiants</a></li>
+    <li><a routerLink="/historique/paiements">Paiements effectués</a></li>
+  </ul>
+</li>
+}
+
+
+
+<li>
+  <a class="logout-button" (click)="logout()">
+    <img src="img/deconnexion.png" alt="Déconnexion" /> Se déconnecter
+  </a>
+</li>
+
+
+  </ul>
+</nav>

@@ -1,0 +1,125 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field label {
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #333;
+}
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.form-button {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button.add {
+  background-color: #007bff;
+  color: white;
+}
+
+button.cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Table */
+.niveau-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.niveau-table th,
+.niveau-table td {
+  border-bottom: 2px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.niveau-table th {
+  background-color: #3f51b5;
+  color: white;
+}
+
+.niveau-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.niveau-table tr:hover {
+  background-color: #e1e1e1;
+}
+
+/* Action buttons */
+.btn {
+  padding: 5px 10px;
+  margin: 2px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+/* Erreur */
+.error {
+  font-size: 12px;
+  color: red;
+  margin-top: 5px;
+}

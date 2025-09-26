@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<h3>Historique d'jouts des étudiants</h3>
+<div class="table-container">
+    <table>
+  <thead>
+    <tr>
+      <th>Utilisateur</th>
+      <th>Étudiant</th>
+      <th>Date d’ajout</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (a of ajouts; track a) {
+        <tr>
+            <td>{{ a.nom_utilisateur }} {{ a.prenom_utilisateur }}</td>
+            <td>{{ a.nom_etudiant }} {{ a.prenom_etudiant }}</td>
+            <td>{{ a.date_ajout_etudiant | date: 'dd MMMM yyyy' }}</td>
+    </tr>
+
+    }
+    
+  </tbody>
+</table>
+</div>
+
